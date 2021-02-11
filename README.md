@@ -4,7 +4,7 @@ Ici des solutions simples pour accéder à distance à un PC.
 # x11vnc
 Accéder à distance à un PC comme si on y était : on peut aider l'utilisateur ou simplement éviter de se déplacer (même souris, même affichage).
 
-Testé avec succès pour accéder à distance à un notebook (Emmabuntüs Debian Buster 32 bits avec gestionnaire de session LightDM) depuis mon PC perso avec Remmina (Ubuntu 16.04 LTS 64 bits).
+Testé avec succès pour accéder à distance à un notebook (Emmabuntüs DE 3 Debian Buster 32 bits avec gestionnaire de session LXQt) depuis mon PC perso avec Remmina (Ubuntu 16.04 LTS 64 bits).
 
 ## Installer le serveur
 Basé sur [ceci](https://debian-facile.org/doc:reseau:x11vnc)
