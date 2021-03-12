@@ -43,3 +43,8 @@ Indiqué par la commande x11vnc du serveur
 
 (2)
 Configuré sur le serveur
+
+## Serveur VNC sous Windows
+Solution Open Source facile à installer pour accéder à distance et est nécessaire quand on utilise une version de Windows qui n'autorise pas d'être utilisé en bureau à distance, donc qui n'autorise pas le RDP (cas de Windows Home)
+Je recommande [TigerVNC](https://www.tightvnc.com/) (configurer avec click droit sur icône dans systray, en choisissant soit avec mot de passe, soit avec autorisation de l'hôte).
+ping vnc-server.local doit résoudre l'IP et si ça s'arrête là, il est probable que le parefeu ne laisse pas passer => le désactiver ou créer une règle
