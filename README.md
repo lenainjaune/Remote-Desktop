@@ -1,7 +1,7 @@
 # Remote-Desktop
 Ici des solutions simples pour accéder à distance à un PC.
 
-# x11vnc
+# x11vnc sous Linux
 Accéder à distance à un PC comme si on y était : on peut aider l'utilisateur ou simplement éviter de se déplacer (même souris, même affichage).
 
 Testé avec succès pour accéder à distance à un notebook (Emmabuntüs DE 3 Debian Buster 32 bits avec gestionnaire de session LXQt) depuis mon PC perso avec Remmina (Ubuntu 16.04 LTS 64 bits).
@@ -44,7 +44,9 @@ Indiqué par la commande x11vnc du serveur
 (2)
 Configuré sur le serveur
 
-## Serveur VNC sous Windows
-Solution Open Source facile à installer pour accéder à distance et est nécessaire quand on utilise une version de Windows qui n'autorise pas d'être utilisé en bureau à distance, donc qui n'autorise pas le RDP (cas de Windows Home)
-Je recommande [TigerVNC](https://www.tightvnc.com/) (configurer avec click droit sur icône dans systray, en choisissant soit avec mot de passe, soit avec autorisation de l'hôte).
+# Serveur VNC sous Windows
+Je recommande [TigerVNC](https://www.tightvnc.com/) qui est une solution Open Source facile à installer pour accéder à distance et est nécessaire quand on utilise une version de Windows qui n'autorise pas d'être utilisé en bureau à distance, donc qui n'autorise pas le RDP (cas de Windows Home). 
+
+Pour configurer : click droit sur icône dans systray, en choisissant soit avec mot de passe, soit avec autorisation de l'hôte.
+
 ping vnc-server.local doit résoudre l'IP et si ça s'arrête là, il est probable que le parefeu ne laisse pas passer => le désactiver ou créer une règle
