@@ -6,7 +6,7 @@ Accéder à distance à un PC comme si on y était : on peut aider l'utilisateur
 
 Testé avec succès pour accéder à distance à un notebook (Emmabuntüs DE 3 Debian Buster 32 bits avec gestionnaire de session LXQt) depuis mon PC perso avec Remmina (Ubuntu 16.04 LTS 64 bits).
 
-## Installer le serveur
+## Démarrer le serveur
 Basé sur [ceci](https://debian-facile.org/doc:reseau:x11vnc)
 
 Depuis le PC distant "serveur VNC" (en root) :
@@ -25,6 +25,26 @@ x11vnc -display :0 -auth /var/run/lightdm/root/:0
 # ...
 # => en attente de connexion distante (ctrl+c pour stopper le serveur VNC)
 ```
+Si on le souhaite, on peut démarrer automatiquement en tant que service :
+```sh
+root@host:~# cat /etc/systemd/system/x11vnc.service
+[Unit]
+Description=Service x11vnc
+Requires=display-manager.service
+After=display-manager.service
+ 
+[Service]
+Type=simple
+ExecStart=/usr/bin/x11vnc -forever -display :0 -auth /var/run/lightdm/root/:0
+
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
+root@host:~# systemctl daemon-reload && systemctl start x11vnc && systemctl enable x11vnc
+```
+
 ## Installer le client
 Depuis le PC local "client VNC", on effectue une connexion sur PC distant (server) sur le port (1) avec l'utilisateur root et son mot de passe (2).
 
