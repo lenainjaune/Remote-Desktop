@@ -25,7 +25,7 @@ x11vnc -display :0 -auth /var/run/lightdm/root/:0
 # ...
 # => en attente de connexion distante (ctrl+c pour stopper le serveur VNC)
 ```
-Si on le souhaite, on peut démarrer automatiquement en tant que service :
+Si on le souhaite, on peut démarrer automatiquement en tant que service (basé sur [ceci](https://debian-facile.org/doc:reseau:x11vnc#au-demarrage-du-systeme-avec-les-services-systemd)) :
 ```sh
 root@host:~# cat /etc/systemd/system/x11vnc.service
 [Unit]
