@@ -12,6 +12,7 @@ Basé sur [ceci](https://debian-facile.org/doc:reseau:x11vnc)
 Depuis le PC distant "serveur VNC" (en root) :
 ```sh
 apt update && apt install x11vnc
+mkdir $HOME/.vnc
 x11vnc -storepasswd ~/.vnc/passwd
 # configurer le mot de passe pour accéder à la session VNC avec root
 pgrep -a Xorg | grep -o '[-]auth [^ ]*'
