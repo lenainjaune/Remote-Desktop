@@ -71,3 +71,7 @@ Je recommande [TigerVNC](https://www.tightvnc.com/) qui est une solution Open So
 Pour configurer : click droit sur icône dans systray, en choisissant soit avec mot de passe, soit avec autorisation de l'hôte.
 
 ping vnc-server.local doit résoudre l'IP et si ça s'arrête là, il est probable que le parefeu ne laisse pas passer => le désactiver ou créer une règle
+# XRDP sous Linux
+Avant que j'approfondisse... 
+
+Pour installer sous Debian Buster, j'ai toujours eu des difficultés. J'utilise [cette procédure](https://www.server-world.info/en/note?os=Debian_10&p=desktop&f=8), mais alors que j'essayais de démarrer et que le service mettait du temps voir semblait ne rien faire, j'ai testé d'annuler et de redémarrer => ça a marché en plus le service démarre automatiquement (enable)
