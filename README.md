@@ -78,3 +78,4 @@ J'ai remarqué un bug pénible : quand on a ouvre une session RDP distante et qu
 Modifier **KillDisconnected=yes** dans le fichier **/etc/xrdp/sesman.ini** (reboot nécéssaire ou **systemctl restart xrdp** suffisant ?)
 
 => fonctionne bien et en plus j'ai l'impression qu'il n'y a pas besoin d'attendre 60s avant la prochaine connexion (parfois oui, parfois non)
+Par contre je suis obligé de déconnecter la session locale avant d'accèder à distance (sudo pkill -KILL -u mon_user pour fermer à distance)
