@@ -73,3 +73,8 @@ Pour configurer : click droit sur icône dans systray, en choisissant soit avec 
 ping vnc-server.local doit résoudre l'IP et si ça s'arrête là, il est probable que le parefeu ne laisse pas passer => le désactiver ou créer une règle
 # XRDP sous Linux
 J'ai suivi [cette procédure](https://blog.eldernode.com/install-xrdp-on-debian-10-buster/) juste en installant et en vérifiant que xrdp était actif. Tout était OK.
+
+J'ai remarqué un bug pénible : quand on a ouvre une session RDP distante et qu'on la ferme ensuite, puis qu'on tente de la rouvrir localement, la session ne s'ouvre pas et on revient à l'écran de login. Redémarrer fonctionne mais est peu pratique. J'ai trouvé [cette solution](https://askubuntu.com/questions/1054063/local-ubuntu-desktop-cannot-login-after-opened-xrdp-session/1054758#1054758) qui est censé rendre disponible une nouvelle connexion après 60s :
+Modifier **KillDisconnected=yes** dans le fichier **/etc/xrdp/sesman.ini** (reboot nécéssaire ou **systemctl restart xrdp** suffisant ?)
+
+=> fonctionne bien et en plus j'ai l'impression qu'il n'y a pas besoin d'attendre 60s avant la prochaine connexion
