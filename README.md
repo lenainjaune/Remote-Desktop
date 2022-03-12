@@ -2,7 +2,7 @@
 Ici des solutions simples pour accéder à distance à un PC. Solution préférée : x2go
 
 # x2go sous Linux
-Nouvelle technologie Open Source pour l'accès distant que je viens de découvrir, tester et que trouve très pratique. Entre autre, on peut ouvrir une session en cours en lecture seule (pratique pour remplacer NoMachine pour venir en aide à un utilisateur). Aussi on peut affiner les contraintes réseau (LAN/ADSL/etc. et la compression) pour avoir une configuration plus réactive.
+Nouvelle technologie Open Source pour l'accès distant que je viens de découvrir, tester et que trouve très pratique. Entre autre, rapide à installaer, on peut ouvrir une session en cours en lecture seule (pratique pour remplacer NoMachine pour venir en aide à un utilisateur), on peut affiner les contraintes réseau (LAN/ADSL/etc. et la compression) pour avoir une configuration plus réactive.
 
 Installer le serveur qui sera accédé de manière distante et le client sur une machine locale (pour l'instant basé sur [ceci](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-remote-desktop-with-x2go-on-debian-10?comment=89552).
 
