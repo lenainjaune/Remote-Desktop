@@ -1,5 +1,23 @@
 # Remote-Desktop
-Ici des solutions simples pour accéder à distance à un PC.
+Ici des solutions simples pour accéder à distance à un PC. Solution préférée : x2go
+
+# x2go sous Linux
+Nouvelle technologie Open Source pour l'accès distant que je viens de découvrir, tester et que trouve très pratique. Entre autre, on peut ouvrir une session en cours en lecture seule (pratique pour remplacer NoMachine pour venir en aide à un utilisateur). Aussi on peut affiner les contraintes réseau (LAN/ADSL/etc. et la compression) pour avoir une configuration plus réactive.
+
+Installer le serveur qui sera accédé de manière distante et le client sur une machine locale (pour l'instant basé sur [ceci](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-remote-desktop-with-x2go-on-debian-10?comment=89552).
+
+Nota : depuis le [site officiel](https://wiki.x2go.org/doku.php/wiki:repositories:debian), je n'ai pas réussi à importer la clé
+Installation du serveur
+
+Installer le serveur (machine distante) :
+```sh
+root@remote_host:~# apt install x2goserver x2goserver-xsession
+```
+Installer le client (machine locale) :
+```sh
+root@local_host:~# apt install x2goclient
+```
+Nota : il y aura sans doute aussi la possibilité d'utiliser Remmina comme client x2go (voir [ici](https://remmina.org/x2go/))
 
 # x11vnc sous Linux
 Accéder à distance à un PC comme si on y était : on peut aider l'utilisateur ou simplement éviter de se déplacer (même souris, même affichage).
