@@ -17,7 +17,7 @@ Installer le client (machine locale) :
 ```sh
 root@local_host:~# apt install x2goclient
 ```
-Nota : il y aura sans doute aussi la possibilité d'utiliser Remmina comme client x2go (voir [ici](https://remmina.org/x2go/))
+Nota : il y aura sans doûte bientôt la possibilité d'utiliser Remmina comme client x2go (voir [ici](https://remmina.org/x2go/))
 
 # x11vnc sous Linux
 Accéder à distance à un PC comme si on y était : on peut aider l'utilisateur ou simplement éviter de se déplacer (même souris, même affichage).
