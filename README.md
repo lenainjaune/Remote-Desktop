@@ -2,6 +2,8 @@
 Ici des solutions simples pour accéder à distance à un PC. Solution préférée : x2go
 
 # x2go sous Linux
+Pas assez mature, à mon sens.
+
 Nouvelle technologie Open Source pour l'accès distant que je viens de découvrir, tester et que trouve très pratique. Entre autre, rapide à installaer, on peut ouvrir une session en cours en lecture seule (pratique pour remplacer NoMachine pour venir en aide à un utilisateur), on peut affiner les contraintes réseau (LAN/ADSL/etc. et la compression) pour avoir une configuration plus réactive. Aussi le copier/coller est fonctionnel nativement (en tout cas dans mon test).
 
 Installer le serveur qui sera accédé de manière distante et le client sur une machine locale (pour l'instant basé sur [ceci](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-remote-desktop-with-x2go-on-debian-10?comment=89552).
@@ -18,6 +20,357 @@ Installer le client (machine locale) :
 root@local_host:~# apt install x2goclient
 ```
 Nota : il y aura sans doûte bientôt la possibilité d'utiliser Remmina comme client x2go (voir [ici](https://remmina.org/x2go/))
+
+# tigervnc
+Brouillon/vrac
+```sh
+# TODO : comprendre pourquoi "-localhost no" est nécessaire pour démarrer le serveur
+
+# SERVER non ROOT
+
+	# Ouvrir session graphique et depuis une console obtenir l'identifiant de session graphique
+
+	echo $DISPLAY
+	:0.0
+
+	# Mémoriser cet identifiant
+
+
+# CLIENT non ROOT
+
+	user@server:~$ ssh root@vm-bullseye-xfce
+
+
+# SERVER ROOT
+
+   19  sed -i "s/$HOSTNAME/server/g" /etc/hostname   
+   20  sed -i "s/$HOSTNAME/server/g" /etc/hosts
+   hostnamectl set-hostname server
+   systemctl restart avahi-daemon
+   
+
+#  SI PRISE A DISTANCE AVEC NOUVELLE SESSION
+
+	# https://computingforgeeks.com/install-and-configure-tigervnc-vnc-server-on-debian/
+   
+	#  si DE xfce absent (inutile si on ne veut pas prendre à distance x0 ; soit ouvrir une session existante pour prendre la main à distance)
+
+	#  Manuellement avec le même programme qu'à l'installation du système   
+
+   22  apt update   
+   23  apt install tasksel -y
+   24  tasksel
+      
+	#  OU automatiquement
+	# https://www.techlear.com/blog/2022/02/09/how-to-install-vnc-server-on-debian-11/
+   
+   sudo apt install -y task-xfce-desktop
+   
+   
+	# pas sur que nécessaire !
+   
+   25  systemctl set-default graphical.target
+   26  reboot
+
+
+	# dbus-x11 semble nécessaire pour empecher les erreurs de connection de socket
+	# https://askubuntu.com/questions/1209147/tigervncviewer-unable-to-connect-to-socket-connection-refused-10061
+	
+   32  apt install -y tigervnc-standalone-server tigervnc-common dbus-x11
+   
+   
+#  SI PRISE A DISTANCE SESSION EXISTANTE X0
+
+	# https://serverfault.com/questions/27044/how-to-vnc-into-an-existing-x-session/924326#924326
+
+	# note : x0vncserver est installé avec tigervnc-scraping-server (le reste n'est pas nécessaire)
+
+	apt install -y tigervnc-scraping-server
+
+
+
+#  DEMARRER SERVER AVEC USER non ROOT
+   
+   28  su - user
+
+
+# SERVER non ROOT
+
+#  SI PRISE A DISTANCE AVEC NOUVELLE SESSION
+
+	vncserver -localhost no
+	
+	user@server:~$ vncserver -localhost no
+	You will require a password to access your desktops.
+
+	Password:
+	Verify:
+	Would you like to enter a view-only password (y/n)? n
+	
+	New Xtigervnc server 'server:2 (user)' on port 5902 for display :2.
+	Use xtigervncviewer -SecurityTypes VncAuth,TLSVnc -passwd /home/user/.vnc/passwd server:2 to connect to the VNC server.
+
+
+#  SI PRISE A DISTANCE SESSION EXISTANTE X0
+
+	# Comme pour vncserver si on ne met pas "-localhost no" on a cette erreur :
+	#  erreur : unable to connect to socket: Connection refused (10061)
+	# https://askubuntu.com/questions/1209147/tigervncviewer-unable-to-connect-to-socket-connection-refused-10061
+
+	user@server:~$ x0vncserver -localhost no -display :0.0
+
+	You will require a password to access your desktops.
+
+	Password:
+	Verify:
+	Would you like to enter a view-only password (y/n)? n
+
+	New X0tigervnc server 'server:0 (user)' on port 5900 for display :0.
+	Use xtigervncviewer -SecurityTypes VncAuth,TLSVnc -passwd /home/user/.vnc/passwd server:0 to connect to the VNC server.
+
+	user@server:~$ x0vncserver -localhost no -display :0
+
+	New X0tigervnc server 'server:0 (user)' on port 5900 for display :0.
+	Use xtigervncviewer -SecurityTypes VncAuth,TLSVnc -passwd /home/user/.vnc/passwd server:0 to connect to the VNC server.
+
+
+
+# CLIENT non ROOT
+
+
+
+
+#  SI PRISE A DISTANCE SESSION EXISTANTE X0
+
+	# Copier/coller de la commande indiquée par x0vncserver
+	#  MAIS "server" n'étant par résolvable ici (avahi), on le modifie en "server.local"
+
+
+	# Mot de passe interactif
+
+	user@server:~$ xtigervncviewer -SecurityTypes VncAuth,TLSVnc server.local:0
+
+
+	# OU mot de passe automatique
+
+	user@server:~$ vncpasswd 
+	Password:
+	Verify:
+	Would you like to enter a view-only password (y/n)? n
+
+	user@server:~$ xtigervncviewer -SecurityTypes VncAuth,TLSVnc -passwd /home/user/.vnc/passwd server.local:0
+
+	Visionneuse TigerVNC 64 bits v1.11.0
+	Compilé sur : 2021-03-22 21:21
+	Copyright © 1999-2020 L’équipe de TigerVNC et beaucoup d’autres (voir README.txt)
+	Voir https://www.tigervnc.org pour plus d’informations sur TigerVNC.
+
+	Sat Jun  4 17:23:47 2022
+	 DecodeManager: Detected 4 CPU core(s)
+	 DecodeManager: Creating 4 decoder thread(s)
+	 CConn:       Connecté à l’hôte server.local par le port 5900
+	 CConnection: Server supports RFB protocol version 3.8
+	 CConnection: Using RFB protocol version 3.8
+	 CConnection: Choosing security type VeNCrypt(19)
+	 CVeNCrypt:   Choosing security type VncAuth (2)
+	 CConn:       Utilisation du format de pixel depth 24 (32bpp) little-endian
+				  rgb888
+	 CConnection: Enabling continuous updates
+
+	Sat Jun  4 17:23:51 2022
+	 CConn:       SetDesktopSize échoué : 3
+
+
+#  STOPPER SERVER AVEC USER non ROOT
+
+
+#  SI PRISE A DISTANCE SESSION EXISTANTE X0
+
+	user@server:~$ x0vncserver -list
+
+	TigerVNC server sessions:
+
+	X DISPLAY #	RFB PORT #	PROCESS ID	SERVER
+	:0         	5900      	1403      	X0tigervnc
+	user@server:~$ x0vncserver -kill :0
+	Killing X0tigervnc process ID 1403... success!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+user@server:~$ history 
+    1  su -
+    2  sudo -i
+    3  su -
+    4  ping localhost
+    5  su -
+    6  vncpasswd 
+    7  vncserver -localhost no
+    8  vncserver -list
+    9  vncserver -kill :1
+   10  vncserver
+   11  vncserver -list
+   12  vncserver -kill :1
+   13  vim .vnc/xstartup
+   15  chmod 777 .vnc/xstartup 
+   16  vncserver
+#   17  tigervncserver -xstartup /usr/bin/xterm
+   18  vncserver -list
+   19  vncpasswd 
+   20  vncserver -list
+   21  vncserver -kill :1
+   22  vncserver -localhost no
+#   23  tigervncserver -xstartup /usr/bin/xterm
+   24  ps aux | grep vnc
+   25  vncserver -list
+   26  vncserver -kill :1
+   27  ps aux | grep vnc
+   28  vncserver
+   29  vim /home/user/.Xresources
+   
+! Color theme to be placed in ~/.Xresources file
+! Enable it at runtime with :
+! $ xrdb ~/.Xresources
+! or
+! $ cat ~/.Xresources | xrdb
+
+ *background: #000000
+ *foreground: #ffffff
+ *color0:     #000000
+ *color1:     #d36265
+ *color2:     #aece91
+ *color3:     #e7e18c
+ *color4:     #7a7ab0
+ *color5:     #963c59
+ *color6:     #418179
+ *color7:     #bebebe
+ *color8:     #666666
+ *color9:     #ef8171
+ *color10:    #e5f779
+ *color11:    #fff796
+ *color12:    #4186be
+ *color13:    #ef9ebe
+ *color14:    #71bebe
+ *color15:    #ffffff
+
+
+   30  vncserver -list
+   31  vncserver
+#   32  tigervncserver -xstartup /usr/bin/xterm
+   33  ip ad
+   34  vncserver -list
+   38  vncserver -kill :1
+   39  vncserver
+   40  vncserver -list
+   43  vim .vnc/xstartup
+#!/bin/bash
+xrdb $HOME/.Xresources
+# Session startup via '~/.vnc/xstartup' cleanly exited too early (< 3 seconds)
+# https://ubuntuforums.org/showthread.php?t=2470276
+#startxfce4 &
+startxfce4
+
+   44  vncserver -kill :1
+   45  vncserver -list
+   46  vncserver
+   47  vncserver -list
+   48  sudo iptables --list
+   49  su -
+   50  vncserver --kill :*
+   51  reboot
+   52  su -
+   53  vncserver -list
+   
+   
+# erreur : unable to connect to socket: Connection refused (10061)
+# https://askubuntu.com/questions/1209147/tigervncviewer-unable-to-connect-to-socket-connection-refused-10061
+   54  vncserver -localhost no
+   55  history 
+
+
+root@server:~# history
+   19  echo server > /etc/hostname 
+   29  vim /etc/hosts
+   20  reboot
+   21  apt update
+   22  apt install tasksel -y 
+   24  tasksel
+   25  systemctl set-default graphical.target
+   26  reboot
+   27  apt install tigervnc-standalone-server tigervnc-common dbus-x11
+   28  su - user
+   
+   
+   
+   
+   
+
+   31  reboot
+   
+# https://askubuntu.com/questions/1209147/tigervncviewer-unable-to-connect-to-socket-connection-refused-10061
+ 
+#   32  apt install dbus-x11
+   34  iptables --list
+   35  ufw status
+   
+# comme netstat ...
+   36  lsof -P -i
+   37  vncserver --kill :*
+   38  reboot
+   39  history 
+
+# CLIENT   
+   
+# KO : ssh -L 5901:127.0.0.1:5901  debian server_ip
+user@server:~$ ssh -L 5901:127.0.0.1:5901 user@server.local
+user@server:~$ xtigervncviewer -SecurityTypes VncAuth,TLSVnc server.local:1
+
+```
+
 
 # x11vnc sous Linux
 Accéder à distance à un PC comme si on y était : on peut aider l'utilisateur ou simplement éviter de se déplacer (même souris, même affichage).
