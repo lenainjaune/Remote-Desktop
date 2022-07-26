@@ -5,7 +5,9 @@ Ici des solutions simples pour accéder à distance à un PC. Solution préfér�
 Brouillon/vrac
 
 TODO : curseur de la souris parceque le point ... BOF (un patch [ici](https://github.com/TigerVNC/tigervnc/issues/1335))
+
 TODO : en contexte multi-écran, prendre à distance un seul écran et définir lequel
+
 TODO : gestion correcte d'un clavier FR (Juste pourquoi ? C'est quoi l'intérêt de faire un logiciel qui ne gère même pas correctement les frappes au clavier (voir [ici](https://github.com/TigerVNC/tigervnc/issues/528) et [là](https://bugzilla.redhat.com/show_bug.cgi?id=1437569) qui indique d'utiliser le paramètre **-RawKeyboard** ; la [doc officielle](https://tigervnc.org/doc/x0vncserver.html) de **x0vncserver** le propose mais apparemment sous Debian 9 Stretch ce n'est pas le cas !) => en attendant LA solution on peut utiliser un clavier virtuel comme [florence](https://www.xmodulo.com/onscreen-virtual-keyboard-linux.html)
 
 [1] Erreur "No password configured for VNC Auth" => [Solution non sécure](https://github.com/TigerVNC/tigervnc/issues/457#issuecomment-301099245)
