@@ -3,6 +3,62 @@ Ici des solutions simples pour accéder à distance à un PC. Solution préfér�
 
 # tigervnc
 Brouillon/vrac
+
+TODO : curseur de la souris parceque le point ... BOF		   
+TODO : en contexte multi-écran, prendre à distance un seul écran et définir lequel
+
+[1] Erreur "No password configured for VNC Auth" => [Solution non sécure](https://github.com/TigerVNC/tigervnc/issues/457#issuecomment-301099245)
+```sh
+# Solution un peu plus "clés en main" (basé sur dessous)
+
+# Notes : 
+# - sur $SERVEUR : tigervnc-scraping-server permet de prendre à distance une session en cours
+# - sur $SERVEUR : x0vncserver ... -SecurityTypes=none (voir [1])
+# - F8 permet d'afficher le menu 
+
+# Serveur (le système distant avec un serveur X installé ; ici Debian 9 Stretch)
+ # en root
+  502  apt update
+  503  apt install -y tigervnc-standalone-server tigervnc-common dbus-x11
+  504  apt install -y tigervnc-scraping-server
+  505  su - $USER
+ # en NON root
+ 1216  x0vncserver -display :0.0 -SecurityTypes=none
+Tue Jul 26 16:47:27 2022
+ Geometry:    Desktop geometry is set to 3840x1080+0+0
+ Main:        XTest extension present - version 2.2
+ Main:        Listening on port 5900 
+ 
+# Client (le viewer ; ici Debian 10 Buster)
+  502  apt update
+  484  apt search tiger
+tigervnc-viewer/oldstable,now 1.9.0+dfsg-3+deb10u3 amd64  [installé]
+  logiciel client d’informatique virtuelle en réseau (VNC) pour⋅X
+  485  apt install tigervnc-viewer/oldstable
+  524  xtigervncviewer -h 2>&1 | grep -i cursor
+DotWhenNoCursor - Show the dot cursor when the server sends an invisible
+                   cursor (default=0)
+  512  xtigervncviewer -SecurityTypes None -DotWhenNoCursor $SERVER:0
+TigerVNC Viewer 64-bit v1.9.0
+Built on: 2020-09-29 18:21
+Copyright (C) 1999-2018 TigerVNC Team and many others (see README.rst)
+See http://www.tigervnc.org for information on TigerVNC.
+
+Tue Jul 26 16:54:40 2022
+ DecodeManager: Detected 4 CPU core(s)
+ DecodeManager: Creating 4 decoder thread(s)
+ CConn:       connected to host bt port 5900
+ CConnection: Server supports RFB protocol version 3.8
+ CConnection: Using RFB protocol version 3.8
+ CConnection: Choosing security type None(1)
+ CConn:       Using pixel format depth 24 (32bpp) little-endian rgb888
+ CConn:       Using Tight encoding
+ CConn:       Enabling continuous updates
+ CConn:       SetDesktopSize failed: 1
+ ```
+
+
+
 ```sh
 # TODO : comprendre pourquoi "-localhost no" est nécessaire pour démarrer le serveur
 
