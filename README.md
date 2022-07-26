@@ -4,7 +4,7 @@ Ici des solutions simples pour accéder à distance à un PC. Solution préfér�
 # tigervnc
 Brouillon/vrac
 
-TODO : curseur de la souris parceque le point ... BOF		   
+TODO : curseur de la souris parceque le point ... BOF (un patch [ici](https://github.com/TigerVNC/tigervnc/issues/1335))
 TODO : en contexte multi-écran, prendre à distance un seul écran et définir lequel
 
 [1] Erreur "No password configured for VNC Auth" => [Solution non sécure](https://github.com/TigerVNC/tigervnc/issues/457#issuecomment-301099245)
