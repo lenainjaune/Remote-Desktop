@@ -1,5 +1,12 @@
 # Remote-Desktop
-Ici des solutions simples pour accéder à distance à un PC. Solution préférée : vnctiger
+Ici des solutions simples pour accéder à distance à un PC. Solution préférée : RustDesk, ~~tigervnc~~
+
+# RustDesk
+TODO : consigner ici la procédure créée sur mon PC
+
+J'ai fait une procédure très complète sur l'installation du client, du server et du server intermédaire pour mettre en relation le client et le server. Pour le server intermédiaire, j'ai rédigé les procédures d'installation sur un système Debian 11 et sur le NAS OpenMediaVault.
+
+Voir admin_info/remote_desktop/rustdesk.odt qu'il faudra que j'intègre ici.
 
 # tigervnc
 Brouillon/vrac
