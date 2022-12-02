@@ -10,6 +10,10 @@ Voir admin_info/remote_desktop/rustdesk.odt qu'il faudra que j'intègre ici.
 
 # RDP to Windows Home
 
+En vrac avant Gitlab
+
+Source qui m'a amené à tester : https://www.ctrl.blog/entry/how-to-rdpwrapper-win10-home.html
+
 RDP Wrapper permet d'accéder en RDP à une édition Home de Windows 7+ (donc pas Seven, ni XP) alors que Microsoft l'en empêche pour obliger les utilisateurs à se tourner vers des éditions plus chères (Pro, etc.)
 
 Site : https://github.com/stascorp/rdpwrap
