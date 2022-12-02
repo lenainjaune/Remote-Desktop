@@ -8,6 +8,49 @@ J'ai fait une procédure très complète sur l'installation du client, du server
 
 Voir admin_info/remote_desktop/rustdesk.odt qu'il faudra que j'intègre ici.
 
+# RDP to Windows Home
+
+RDP Wrapper permet d'accéder en RDP à une édition Home de Windows 7+ (donc pas Seven, ni XP) alors que Microsoft l'en empêche pour obliger les utilisateurs à se tourner vers des éditions plus chères (Pro, etc.)
+
+Site : https://github.com/stascorp/rdpwrap
+
+Légal ? Ce point fait litige ... (https://github.com/stascorp/rdpwrap/issues/26)
+
+Installer (https://superuser.com/questions/1548272/difficulty-installing-rdpwrap-on-windows-10-to-get-multiple-remote-desktop-conn/1548312#1548312)
+
+Récupérer l'archive zip des applications (dans mon cas : RDPWrap-v1.6.2.zip) et décompresser
+
+Depuis CLI, exécuter le script install.bat
+
+Si tout se passe bien (Successfully installed), on devrait avoir :
+C:\Program Files\RDP Wrapper\rdpwrap.ini
+C:\Program Files\RDP Wrapper\rdpwrap.dll
+
+Note : si l'installation échoue, voir plus bas les cas d'erreur
+
+Ensuite il faut vérifier RDPConf :
+Wrapper state: Installed        ver. 1.5.0.0
+Service state: Running          ver: 10.0.19041.789
+Listener state: Not listening   [not supported]
+
+Confirmé en CLI par :
+wmic datafile where name="c:\\Windows\\System32\\termsrv.dll" get version
+Version
+10.0.19041.789
+
+Stopper le service Terminal Server : net stop TermService
+
+Ajouter au fichier C:\Program Files\RDP Wrapper\rdpwrap.ini
+la configuration add_to_ini_for_10.0.19041.789_version_dll.txt (voir https://github.com/stascorp/rdpwrap/issues/1342#issuecomment-794558507)
+
+Redémarrer : net start TermService
+
+Voir ce lien pour plus de détails concernant la configuration dans le fichier INI : https://github.com/stascorp/rdpwrap/issues/1342#issuecomment-1334016736
+
+Erreurs
+
+si lors de l'installation on a "Accès refusé", j'ai déjà résolu le problème en excluant le dossier de la Protection contre les virus et menaces de Windows 10
+
 # tigervnc
 Brouillon/vrac
 
