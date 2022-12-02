@@ -45,11 +45,11 @@ la configuration add_to_ini_for_10.0.19041.789_version_dll.txt (voir https://git
 
 Redémarrer : net start TermService
 
-Voir ce lien pour plus de détails concernant la configuration dans le fichier INI : https://github.com/stascorp/rdpwrap/issues/1342#issuecomment-1334016736
-
 Erreurs
 
 si lors de l'installation on a "Accès refusé", j'ai déjà résolu le problème en excluant le dossier de la Protection contre les virus et menaces de Windows 10
+
+Voir ce lien pour plus de détails concernant la configuration dans le fichier INI : https://github.com/stascorp/rdpwrap/issues/1342#issuecomment-1334016736
 
 # tigervnc
 Brouillon/vrac
