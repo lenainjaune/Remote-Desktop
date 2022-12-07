@@ -1,6 +1,10 @@
 # Remote-Desktop
 Ici des solutions simples pour accéder à distance à un PC. Solution préférée : RustDesk, ~~tigervnc~~
 
+# Powershell
+
+Voir aussi https://github.com/lenainjaune/powershell
+
 # RustDesk
 TODO : consigner ici la procédure créée sur mon PC
 
