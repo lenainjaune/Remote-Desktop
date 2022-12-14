@@ -12,6 +12,46 @@ J'ai fait une procédure très complète sur l'installation du client, du server
 
 Voir admin_info/remote_desktop/rustdesk.odt qu'il faudra que j'intègre ici.
 
+# XRDP pour Linux
+
+TODO : à retester depuis Debian 11 fresh 32-bits et 64-bits, idem pour Debian 10 ; tester Debian 10/11 NON fresh
+
+J'ai toujours galéré à installer et puis j'ai testé [How to Install Xrdp Server on Debian 11](https://itslinuxfoss.com/xrdp-server-on-debian-11/) sur une installation fresh de Debian 11 32-bits.
+
+Ca a fonctionné nickel (voir commandes effectives dessous) !
+
+Note : à la première ouverture de session j'ai eu un message "il est nécessaire de s'authentifier pour créer un périphérique avec gestion de couleurs" qui demandait l'accès root et j'ai résolu le problème avec [Comment se connecter en RDP à Debian 10 avec xRDP ?](https://www.it-connect.fr/comment-se-connecter-en-rdp-a-debian-10-avec-xrdp/#V_Resoudre_les_erreurs_de_connexion_xRDP) qui indique une protection de PolKit.
+
+```sh
+# Depuis fresh installation en VM de Debian Bullseye 11 (kernel 5.10.0-19-686-pae)
+
+# Avant de suivre le tutoriel (tout n'est pas utile, la modif sshd_config est pour autoriser root par ssh) :
+apt update
+apt install -y ssh avahi-daemon
+apt install -y vim htop locate less aptitude wget gawk man sshfs rsync tree curl net-tools gnupg2 rfkill util-linux nmap tcpdump binutils screen pv ntfs-3g
+vim /etc/ssh/sshd_config
+systemctl restart ssh
+
+# Commandes basées sur tuto
+# Notes : 
+# - installation XFCE4 par tasksel comme à l'installation
+# - user xrdp conforme à ce qui est dit
+# - dans mon cas pas de FW à configurer (ufw non installé)
+# - protection PolKit gérée à la fin
+apt install tasksel
+tasksel
+apt install xfce4-goodies xorg dbus-x11 x11-xserver-utils
+apt install xrdp
+systemctl status xrdp
+grep xrdp /etc/passwd
+ls -l /etc/ssl/private/ssl-cert-snakeoil.key
+adduser xrdp ssl-cert
+groups xrdp
+systemctl restart xrdp
+man ufw
+vim /etc/polkit-1/localauthority.conf.d/02-allow-colord.conf
+```
+
 # RDP to Windows Home
 
 En vrac avant Gitlab
