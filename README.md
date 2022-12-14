@@ -1,7 +1,7 @@
 # Remote-Desktop
 Ici des solutions simples pour accéder à distance à un PC. Solution préférée : RustDesk, ~~tigervnc~~
 
-# Powershell
+# Powershell
 
 Voir aussi https://github.com/lenainjaune/powershell
 
@@ -12,7 +12,7 @@ J'ai fait une procédure très complète sur l'installation du client, du server
 
 Voir admin_info/remote_desktop/rustdesk.odt qu'il faudra que j'intègre ici.
 
-# XRDP pour Linux
+# XRDP pour Linux
 
 TODO : à retester depuis Debian 11 fresh 32-bits et 64-bits, idem pour Debian 10 ; tester Debian 10/11 NON fresh
 
