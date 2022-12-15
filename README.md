@@ -40,16 +40,32 @@ systemctl restart ssh
 # - protection PolKit gérée à la fin
 apt install tasksel
 tasksel
-apt install xfce4-goodies xorg dbus-x11 x11-xserver-utils
-apt install xrdp
+apt install -y xfce4-goodies xorg dbus-x11 x11-xserver-utils
+apt install -y xrdp
 systemctl status xrdp
 grep xrdp /etc/passwd
 ls -l /etc/ssl/private/ssl-cert-snakeoil.key
+groups xrdp
 adduser xrdp ssl-cert
 groups xrdp
 systemctl restart xrdp
 man ufw
 vim /etc/polkit-1/localauthority.conf.d/02-allow-colord.conf
+```
+02-allow-colord.conf contiendra (copié depuis source) :
+```
+polkit.addRule(function(action, subject) {
+if ((action.id == "org.freedesktop.color-manager.create-device" ||
+ action.id == "org.freedesktop.color-manager.create-profile" ||
+ action.id == "org.freedesktop.color-manager.delete-device" ||
+ action.id == "org.freedesktop.color-manager.delete-profile" ||
+ action.id == "org.freedesktop.color-manager.modify-device" ||
+ action.id == "org.freedesktop.color-manager.modify-profile" ||
+ action.id == "org.freedesktop.packagekit.system-sources-refresh" || action.id == "org.freedesktop.packagekit.system-network-proxy-configure") &&
+ subject.isInGroup("{users}")) {
+ return polkit.Result.YES;
+ }
+});
 ```
 
 # RDP to Windows Home
