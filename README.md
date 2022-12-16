@@ -15,6 +15,7 @@ Voir admin_info/remote_desktop/rustdesk.odt qu'il faudra que j'intègre ici.
 # XRDP pour Linux
 
 DEBUG : service XRDP stoppé, xrdp-sesman -ns et xrdp -ns
+DEBUG : il est aussi important de connaitre la disponibilité de l'hôte : H=k-hp.local ; P=3389 ; until false ; do echo "Tentative de connexion sur $H sur le port $P ..." ; until r=$( nc -vw 2 $H $P 2>&1 ) ; do sleep 1 ; echo "$( date ) $r" ; done ; echo "Port $P accessible depuis hote $H" ; done
 
 TODO : à retester depuis Debian 11 fresh 32-bits et 64-bits, idem pour Debian 10 ; tester Debian 10/11 NON fresh
 
