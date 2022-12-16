@@ -70,6 +70,10 @@ if ((action.id == "org.freedesktop.color-manager.create-device" ||
 });
 ```
 
+Problèmes ?
+
+Voir instructions DEBUG dessus
+
 # RDP to Windows Home
 
 En vrac avant Gitlab
