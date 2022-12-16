@@ -14,6 +14,8 @@ Voir admin_info/remote_desktop/rustdesk.odt qu'il faudra que j'intègre ici.
 
 # XRDP pour Linux
 
+DEBUG : service XRDP stoppé, xrdp-sesman -ns et xrdp -ns
+
 TODO : à retester depuis Debian 11 fresh 32-bits et 64-bits, idem pour Debian 10 ; tester Debian 10/11 NON fresh
 
 J'ai toujours galéré à installer et puis j'ai testé [How to Install Xrdp Server on Debian 11](https://itslinuxfoss.com/xrdp-server-on-debian-11/) sur une installation fresh de Debian 11 32-bits.
