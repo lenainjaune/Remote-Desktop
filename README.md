@@ -14,6 +14,8 @@ Voir admin_info/remote_desktop/rustdesk.odt qu'il faudra que j'intègre ici.
 
 # XRDP pour Linux
 
+TODO : gérer les bugs
+
 DEBUG : service XRDP stoppé, xrdp-sesman -ns et xrdp -ns
 DEBUG : il est aussi important de connaitre la disponibilité de l'hôte : H=k-hp.local ; P=3389 ; until false ; do echo "Tentative de connexion sur $H sur le port $P ..." ; until r=$( nc -vw 2 $H $P 2>&1 ) ; do sleep 1 ; echo "$( date ) $r" ; done ; echo "Port $P accessible depuis hote $H" ; done
 
@@ -73,7 +75,11 @@ if ((action.id == "org.freedesktop.color-manager.create-device" ||
 
 Problèmes ?
 
-Voir instructions DEBUG dessus
+Voir instructions DEBUG dessus ou les bugs connus dessous
+
+## Bugs connus (de moi)
+Quand je me connecte en RDP avec Remmina, si je ferme la fenêtre RDP SANS déconnexion de la session, alors il m'est impossible d'ouvrir une session locale  depuis l'hôte, une fenêtre noire s'affiche rapidement puis disparait pour revenir au choix des utilisateurs.
+=> solution de contournement : ouvrir à nouveau une session par RDP et cette fois, déconnecter au lieu de fermer la fenêtre
 
 # RDP to Windows Home
 
